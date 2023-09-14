@@ -2,11 +2,9 @@ import java.util.Scanner;
 
 class BankAccount {
     private double balance;
-
     public BankAccount(double initialBalance) {
         balance = initialBalance;
     }
-
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
@@ -15,7 +13,6 @@ class BankAccount {
             System.out.println("Invalid deposit amount.");
         }
     }
-
     public boolean withdraw(double amount) {
         if (amount > 0 && balance >= amount) {
             balance -= amount;
@@ -26,7 +23,6 @@ class BankAccount {
             return false;
         }
     }
-
     public double checkBalance() {
         return balance;
     }
@@ -34,11 +30,9 @@ class BankAccount {
 
 public class ATM {
     private BankAccount userAccount;
-
     public ATM(BankAccount account) {
         userAccount = account;
     }
-
     public void displayMenu() {
         System.out.println("\nMenu:");
         System.out.println("1. Withdraw");
@@ -46,15 +40,12 @@ public class ATM {
         System.out.println("3. Check Balance");
         System.out.println("4. Exit");
     }
-
     public void run() {
         Scanner scanner = new Scanner(System.in);
-
         while (true) {
             displayMenu();
             System.out.print("Please select an option (1/2/3/4): ");
             int choice = scanner.nextInt();
-
             switch (choice) {
                 case 1:
                     withdraw();
@@ -75,31 +66,26 @@ public class ATM {
             }
         }
     }
-
     public void withdraw() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the amount to withdraw: ");
         double amount = scanner.nextDouble();
-
         if (userAccount.withdraw(amount)) {
             System.out.println("Withdrawn successfully.");
         } else {
             System.out.println("Withdrawal failed.");
         }
     }
-
     public void deposit() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the amount to deposit: ");
         double amount = scanner.nextDouble();
         userAccount.deposit(amount);
     }
-
     public void checkBalance() {
         double balance = userAccount.checkBalance();
         System.out.println("Current balance: $" + balance);
     }
-
     public static void main(String[] args) {
         BankAccount account = new BankAccount(1000.0); // Initial balance
         ATM atm = new ATM(account);
